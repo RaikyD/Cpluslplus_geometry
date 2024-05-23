@@ -12,4 +12,6 @@ add_executable(contest5 main.cpp
         Point.h
         Segment.cpp
         Segment.h
+        Line.cpp
+        Line.h
 )

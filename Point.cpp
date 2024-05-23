@@ -1,7 +1,3 @@
-//
-// Created by Даниил Гуршумов on 22.05.2024.
-//
-
 #include "Point.h"
 #include "Segment.h"
 namespace geometry {
@@ -38,13 +34,14 @@ bool Point::CrossesSegment(const Segment& s) const {
     return false;
   }
 
-  int dotprod = (x_ - a.x_) * (b.x_ - a.x_) + (y_ - a.y_ * (b.y_ - a.y_);
-  if (dotprod < 0)
+  int dotprod = (x_ - a.x_) * (b.x_ - a.x_) + (y_ - a.y_ * (b.y_ - a.y_));
+  if (dotprod < 0) {
     return false;
-
+  }
   int squaredlengthba = (b.x_ - a.x_) * (b.x_ - a.x_) + (b.y_ - a.y_) * (b.y_ - a.y_);
-  if (dotprod > squaredlengthba)
+  if (dotprod > squaredlengthba) {
     return false;
+  }
   return true;
 }
 
