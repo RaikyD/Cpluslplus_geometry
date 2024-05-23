@@ -3,7 +3,7 @@
 #include "Vector.h"
 #include "Point.h"
 namespace geometry {
-Segment::Segment(const Point &p1, const Point &p2) : p1_(p1), p2_(p2) {
+Segment::Segment(const Point& p1, const Point& p2) : p1_(p1), p2_(p2) {
 }
 
 IShape &Segment::Move(const Vector &v) {
@@ -26,17 +26,20 @@ Point Segment::GetValue_p2() const {
 // 0 -> p, q и r коллинеарны
 // 1 -> по часовой стрелке
 // 2 -> против часовой стрелки
-int Segment::orientation(const Point& p, const Point& q, const Point& r) const {
-  double val = (q.GetValueY() - p.GetValueY()) * (r.GetValueX() - q.GetValueX()) - (q.GetValueX() - p.GetValueX()) * (r.GetValueY() - q.GetValueY());
+int Segment::orientation(const Point &p, const Point &q, const Point &r) const {
+  double val = (q.GetValueY() - p.GetValueY()) * (r.GetValueX() - q.GetValueX()) -
+               (q.GetValueX() - p.GetValueX()) * (r.GetValueY() - q.GetValueY());
   if (val == 0)
     return 0;                // Коллинеарны
   return (val > 0) ? 1 : 2;  // По часовой или против часовой
 }
 
 // Функция для проверки, лежит ли точка q на отрезке pr
-bool Segment::onSegment(const Point p, const Point q, const Point r) const{
-  if (q.GetValueX() <= std::max(p.GetValueX(), r.GetValueX()) && q.GetValueX() >= std::min(p.GetValueX(), r.GetValueX()) &&
-      q.GetValueY() <= std::max(p.GetValueY(), r.GetValueY()) && q.GetValueY() >= std::min(p.GetValueY(), r.GetValueY()))
+bool Segment::onSegment(const Point p, const Point q, const Point r) const {
+  if (q.GetValueX() <= std::max(p.GetValueX(), r.GetValueX()) &&
+      q.GetValueX() >= std::min(p.GetValueX(), r.GetValueX()) &&
+      q.GetValueY() <= std::max(p.GetValueY(), r.GetValueY()) &&
+      q.GetValueY() >= std::min(p.GetValueY(), r.GetValueY()))
     return true;
   return false;
 }
@@ -78,7 +81,7 @@ bool Segment::doIntersect(const Point &p1, const Point &q1, const Point &p2, con
 }
 
 [[nodiscard]] std::unique_ptr<IShape> Segment::Clone() const {
-  return std::make_unique<Segment>(p1, p2);
+  return std::make_unique<Segment>(p1_, p2_);
 }
 
 [[nodiscard]] std::string Segment::ToString() const {

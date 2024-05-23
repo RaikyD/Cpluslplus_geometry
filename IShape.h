@@ -25,4 +25,4 @@ class IShape {
 };
 }  // namespace geometry
 
-#endif  // CONTEST5_ISHAPE_H
+#endif
