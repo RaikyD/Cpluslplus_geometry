@@ -1,7 +1,3 @@
-//
-// Created by Даниил Гуршумов on 22.05.2024.
-//
-
 #ifndef CONTEST5_ISHAPE_H
 #define CONTEST5_ISHAPE_H
 
@@ -12,6 +8,10 @@
 namespace geometry {
 class Point;
 class Segment;
+class Line;
+class Ray;
+class Polygon;
+class Circle;
 
 class IShape {
  public:
@@ -23,10 +23,6 @@ class IShape {
 
   virtual ~IShape() = default;
 };
-}
-
-
-
-
+}  // namespace geometry
 
 #endif  // CONTEST5_ISHAPE_H

@@ -1,10 +1,22 @@
 #include "Segment.h"
-Segment::Segment(const Point& p1, const Point& p2) : p1(p1), p2(p2) {}
+#include "IShape.h"
+#include "Vector.h"
+#include "Point.h"
+namespace geometry {
+Segment::Segment(const Point& p1, const Point& p2) : p1(p1), p2(p2) {
+}
 
 IShape& Segment::Move(const Vector& v) {
   p1.Move(v);
   p2.Move(v);
   return *this;
+}
+Point Segment::GetValue_p1() const {
+  return p1;
+
+}
+Point Segment::GetValue_p2() const {
+  return p2;
 }
 
 [[nodiscard]] bool Segment::ContainsPoint(const Point& p) const {
@@ -38,18 +50,7 @@ IShape& Segment::Move(const Vector& v) {
 }
 
 [[nodiscard]] std::string Segment::ToString() const {
-  return "Segment[(" + std::to_string(p1.GetValueOf_X()) + ", " + std::to_string(p1.GetValueOf_Y()) +
-         "), (" + std::to_string(p2.GetValueOf_X()) + ", " + std::to_string(p2.GetValueOf_Y()) + ")]";
+  return "Segment[(" + std::to_string(p1.GetValueOf_X()) + ", " + std::to_string(p1.GetValueOf_Y()) + "), (" +
+         std::to_string(p2.GetValueOf_X()) + ", " + std::to_string(p2.GetValueOf_Y()) + ")]";
 }
-
-bool Segment::Contains(const Point& p) const {
-  Vector v1 = p2 - p1;
-  Vector v2 = p - p1;
-  double cross = v1.GetValueOf_X() * v2.GetValueOf_Y() - v1.GetValueOf_Y() * v2.GetValueOf_X();
-  if (std::abs(cross) > 1e-6)
-    return false;
-  double dot = v1.GetValueOf_X() * v2.GetValueOf_X() + v1.GetValueOf_Y() * v2.GetValueOf_Y();
-  return dot >= 0 && dot <= v1.GetValueOf_X() * v1.GetValueOf_X() + v1.GetValueOf_Y() * v1.GetValueOf_Y();
-}
-
-
+}  // namespace geometry

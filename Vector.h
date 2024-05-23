@@ -1,10 +1,5 @@
-//
-// Created by Даниил Гуршумов on 22.05.2024.
-//
-
 #ifndef CONTEST5_VECTOR_H
 #define CONTEST5_VECTOR_H
-#pragma once
 
 namespace geometry {
 class Vector {

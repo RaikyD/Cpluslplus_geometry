@@ -1,4 +1,3 @@
-
 #ifndef CONTEST5_POINT_H
 #define CONTEST5_POINT_H
 #include "IShape.h"
@@ -12,6 +11,8 @@ class Point : public IShape {
  public:
   Point(int x, int y);
   Point(const Point& other);
+  [[nodiscard]] int GetValueX() const;
+  [[nodiscard]] int GetValueY() const;
   IShape& Move(const Vector& v) override;
   [[nodiscard]] bool ContainsPoint(const Point& p) const override;
   [[nodiscard]] bool CrossesSegment(const Segment& s) const override;

@@ -3,7 +3,7 @@
 //
 
 #include "Point.h"
-
+#include "Segment.h"
 namespace geometry {
 Point::Point(int x, int y) {
   x_ = x;
@@ -12,6 +12,12 @@ Point::Point(int x, int y) {
 Point::Point(const Point& other) {
   x_ = other.x_;
   y_ = other.y_;
+}
+int Point::GetValueX() const {
+  return x_;
+}
+int Point::GetValueY() const {
+  return y_;
 }
 IShape& Point::Move(const Vector& v) {
   x_ += v.GetValueOf_X();
@@ -24,7 +30,22 @@ bool Point::ContainsPoint(const Point& p) const {
 }
 
 bool Point::CrossesSegment(const Segment& s) const {
-  return s.Contains(*this);
+  Point a = s.GetValue_p1();
+  Point b = s.GetValue_p2();
+  int cross = (y_ - a.y_) * (b.x_ - a.x_) - (x_ - a.x_) * (b.y_ - a.y_);
+
+  if (std::abs(cross) > 1e-6) {
+    return false;
+  }
+
+  int dotprod = (x_ - a.x_) * (b.x_ - a.x_) + (y_ - a.y_ * (b.y_ - a.y_);
+  if (dotprod < 0)
+    return false;
+
+  int squaredlengthba = (b.x_ - a.x_) * (b.x_ - a.x_) + (b.y_ - a.y_) * (b.y_ - a.y_);
+  if (dotprod > squaredlengthba)
+    return false;
+  return true;
 }
 
 [[nodiscard]] std::unique_ptr<IShape> Point::Clone() const {
@@ -34,4 +55,4 @@ bool Point::CrossesSegment(const Segment& s) const {
 [[nodiscard]] std::string Point::ToString() const {
   return "Point(" + std::to_string(x_) + ", " + std::to_string(y_) + ")";
 }
-}
+}  // namespace geometry
