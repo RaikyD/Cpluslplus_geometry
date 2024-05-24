@@ -18,4 +18,6 @@ add_executable(contest5 main.cpp
         src/ray.cpp
         polygon.h
         src/polygon.cpp
+        circle.h
+        src/circle.cpp
 )

@@ -52,4 +52,8 @@ bool Point::CrossesSegment(const Segment& s) const {
 [[nodiscard]] std::string Point::ToString() const {
   return "Point(" + std::to_string(x_) + ", " + std::to_string(y_) + ")";
 }
+
+Vector Point::operator-(const geometry::Point& p) const {
+  return {this->x_ - p.x_, this->y_ - p.y_};
+}
 }  // namespace geometry
