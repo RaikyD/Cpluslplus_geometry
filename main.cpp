@@ -7,8 +7,17 @@
 #include "segment.h"
 #include "ray.h"
 #include "line.h"
-
+#include "circle.h"
 #include "polygon.h"
+
+#include "vector.h"   // check include guards
+#include "point.h"    // check include guards
+#include "segment.h"  // check include guards
+#include "ray.h"      // check include guards
+#include "line.h"     // check include guards
+#include "circle.h"   // check include guards
+#include "polygon.h"  // check include guards
+
 template <class SmartPtrT>
 void Delete(const SmartPtrT&) {
 }
@@ -17,7 +26,6 @@ template <class T>
 void Delete(T* ptr) {
   delete ptr;
 }
-namespace geometry {
 
 void CheckFunctions(const geometry::IShape* shape_ptr, const geometry::Point& point_a, const geometry::Point& point_b) {
   std::cout << "Given shape " << (shape_ptr->ContainsPoint(point_a) ? "contains" : "does not contain") << " point A\n";
@@ -66,6 +74,12 @@ int main() {
       points.emplace_back(x, y);
     }
     shape_ptr = std::make_unique<geometry::Polygon>(std::move(points));
+  } else if (command == "circle") {
+    std::cin >> x >> y;
+    const auto center = geometry::Point(x, y);
+    uint32_t radius = 0;
+    std::cin >> radius;
+    shape_ptr = std::make_unique<geometry::Circle>(center, radius);
   } else {
     std::cerr << "Undefined command" << std::endl;
     return 1;
@@ -79,4 +93,3 @@ int main() {
   CheckFunctions(shape_ptr.get(), point_a, point_b);
   return 0;
 }
-}  // namespace geometry

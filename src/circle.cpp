@@ -1,5 +1,6 @@
 #include "../circle.h"
 #include "../point.h"
+#include <string>
 
 namespace geometry {
 Circle::Circle(const Point& p, int r) : center_point_(p), radius_(r) {
@@ -41,6 +42,7 @@ std::unique_ptr<IShape> Circle::Clone() const {
 }
 
 std::string Circle::ToString() const {
-  return "Pizdec";
+  return "Circle(Point(" + std::to_string(center_point_.GetValueX()) + ", " +
+         std::to_string(center_point_.GetValueY()) + "), " + std::to_string(radius_) + ")";
 }
 }  // namespace geometry

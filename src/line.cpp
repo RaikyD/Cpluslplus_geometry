@@ -16,20 +16,59 @@ bool Line::ContainsPoint(const Point& p) const {
 }
 
 bool Line::CrossesSegment(const Segment& Segment) const {
-  Point p1 = Segment.GetValuep1();
-  Point p2 = Segment.GetValuep2();
-  int k = (p2.GetValueY() - p1.GetValueY()) / (p2.GetValueX() - p1.GetValueX());
-  int b = p1.GetValueY() - k * p1.GetValueX();
-  bool side1 = (p1.GetValueY() - (k * p1.GetValueX() + b)) * (p2.GetValueY() - (k * p2.GetValueX() + b)) <= 0;
-  return side1;
+  int x11 = p1_.GetValueX();
+  int y11 = p1_.GetValueY();
+  int x12 = p2_.GetValueX();
+  int y12 = p2_.GetValueY();
+
+  int x21 = Segment.GetValuep1().GetValueX();
+  int y21 = Segment.GetValuep1().GetValueY();
+  int x22 = Segment.GetValuep2().GetValueX();
+  int y22 = Segment.GetValuep2().GetValueY();
+
+  int maxx1 = std::max(x11, x12), maxy1 = std::max(y11, y12);
+  int minx1 = std::min(x11, x12), miny1 = std::min(y11, y12);
+  int maxx2 = std::max(x21, x22), maxy2 = std::max(y21, y22);
+  int minx2 = std::min(x21, x22), miny2 = std::min(y21, y22);
+
+  if (minx1 > maxx2 || maxx1 < minx2 || miny1 > maxy2 || maxy1 < miny2) {
+    return false;
+  }
+
+  int dx1 = x12 - x11, dy1 = y12 - y11;
+  int dx2 = x22 - x21, dy2 = y22 - y21;
+  int dxx = x11 - x21, dyy = y11 - y21;
+  int div, mul;
+
+  if ((div = (int)((double)dy2 * dx1 - (double)dx2 * dy1)) == 0) {
+    return false;
+  }
+  if (div > 0) {
+    if ((mul = (int)((double)dx1 * dyy - (double)dy1 * dxx)) < 0 || mul > div) {
+      return false;
+    }
+    if ((mul = (int)((double)dx2 * dyy - (double)dy2 * dxx)) < 0 || mul > div) {
+      return false;
+    }
+  } else {
+    if ((mul = -(int)((double)dx1 * dyy - (double)dy1 * dxx)) < 0 || mul > -div) {
+      return false;
+    }
+    if ((mul = -(int)((double)dx2 * dyy - (double)dy2 * dxx)) < 0 || mul > -div) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
-[[nodiscard]] std::unique_ptr<IShape> Line::Clone() const {
+std::unique_ptr<IShape> Line::Clone() const {
   return std::make_unique<Line>(p1_, p2_);
 }
-[[nodiscard]] std::string Line::ToString() const {
-  return "Line[(" + std::to_string(p1_.GetValueX()) + ", " + std::to_string(p1_.GetValueY()) + "), (" +
-         std::to_string(p2_.GetValueX()) + ", " + std::to_string(p2_.GetValueY()) + ")]";
+std::string Line::ToString() const {
+  return "Line(" + std::to_string(p2_.GetValueY() - p1_.GetValueY()) + ", " +
+         std::to_string(p1_.GetValueX() - p2_.GetValueX()) + ", " +
+         std::to_string(p2_.GetValueX() * p1_.GetValueY() - p1_.GetValueX() * p2_.GetValueY()) + ")";
 }
 Point Line::GetValueOfP1() const {
   return p1_;
