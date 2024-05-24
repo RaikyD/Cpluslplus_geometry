@@ -12,11 +12,11 @@ class Line : public IShape {
  public:
   Line(const Point& p1, const Point& p2);
   IShape& Move(const Vector& v) override;
-  bool ContainsPoint(const Point& point) const override;
-  bool CrossesSegment(const Segment& segment) const override;
+  [[nodiscard]] bool ContainsPoint(const Point& point) const override;
+  [[nodiscard]] bool CrossesSegment(const Segment& segment) const override;
   [[nodiscard]] std::unique_ptr<IShape> Clone() const override;
   [[nodiscard]] std::string ToString() const override;
-  Point GetValueOfP1() const;
-  Point GetValueOfP2() const;
+  [[nodiscard]] Point GetValueOfP1() const;
+  [[nodiscard]] Point GetValueOfP2() const;
 };
 }  // namespace geometry

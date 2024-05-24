@@ -4,7 +4,7 @@
 #include "../point.h"
 
 namespace geometry {
-Segment::Segment(const Point & p1, const Point & p2) : p1_(p1), p2_(p2) {
+Segment::Segment(const Point &p1, const Point &p2) : p1_(p1), p2_(p2) {
 }
 
 IShape &Segment::Move(const Vector &v) {
@@ -86,8 +86,7 @@ bool Segment::DoIntersect(const Point &p1, const Point &q1, const Point &p2, con
 }
 
 [[nodiscard]] std::string Segment::ToString() const {
-  return "Segment[(" + std::to_string(p1_.GetValueX()) + ", " + std::to_string(p1_.GetValueY()) + "), (" +
-         std::to_string(p2_.GetValueX()) + ", " + std::to_string(p2_.GetValueY()) + ")]";
+  return "Segment(Point(" + std::to_string(p1_.GetValueX()) + ", " + std::to_string(p1_.GetValueY()) + "), Point(" +
+         std::to_string(p2_.GetValueX()) + ", " + std::to_string(p2_.GetValueY()) + "))";
 }
-
 }  // namespace geometry

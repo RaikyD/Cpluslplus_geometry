@@ -5,14 +5,15 @@
 namespace geometry {
 class Circle : public IShape {
  private:
-  Point CenterPoint;
-  int Radius;
+  Point center_point_;
+  int radius_;
+
  public:
   Circle(const Point& p, int r);
   IShape& Move(const Vector& v) override;
-  bool ContainsPoint(const Point& p) const override;
-  bool CrossesSegment(const Segment& s) const override;
+  [[nodiscard]] bool ContainsPoint(const Point& p) const override;
+  [[nodiscard]] bool CrossesSegment(const Segment& s) const override;
   [[nodiscard]] std::unique_ptr<IShape> Clone() const override;
   [[nodiscard]] std::string ToString() const override;
 };
-}
+}  // namespace geometry

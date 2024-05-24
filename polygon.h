@@ -4,16 +4,18 @@
 #include "point.h"
 #include "vector.h"
 #include "segment.h"
+#include <vector>
 
 namespace geometry {
 class Polygon : public IShape {
  private:
   std::vector<Point> points_;
+
  public:
-  Polygon(const std::vector<Point>& points);
+  explicit Polygon(const std::vector<Point>& points);
   IShape& Move(const Vector& v) override;
-  bool ContainsPoint(const Point& p) const override;
-  bool CrossesSegment(const Segment& s) const override;
+  [[nodiscard]] bool ContainsPoint(const Point& p) const override;
+  [[nodiscard]] bool CrossesSegment(const Segment& s) const override;
   [[nodiscard]] std::unique_ptr<IShape> Clone() const override;
   [[nodiscard]] std::string ToString() const override;
 };

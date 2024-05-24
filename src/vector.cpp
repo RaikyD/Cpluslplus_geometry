@@ -4,11 +4,11 @@ namespace geometry {
 Vector::Vector(int x, int y) : x_(x), y_(y) {
 }
 
-[[nodiscard]] int Vector::GetValueOfX() const {
+int Vector::GetValueOfX() const {
   return x_;
 }
 
-[[nodiscard]] int Vector::GetValueOfY() const {
+int Vector::GetValueOfY() const {
   return y_;
 }
 

@@ -4,8 +4,8 @@
 
 namespace geometry {
 
-Polygon::Polygon(const std::vector<Point>& points_)
-    : points_(points_) {}
+Polygon::Polygon(const std::vector<Point>& points_) : points_(points_) {
+}
 
 IShape& Polygon::Move(const Vector& vector) {
   for (auto& point : points_) {
@@ -18,7 +18,10 @@ bool Polygon::ContainsPoint(const Point& point) const {
   bool inside = false;
   for (size_t i = 0, j = points_.size() - 1; i < points_.size(); j = i++) {
     if ((points_[i].GetValueY() > point.GetValueY()) != (points_[j].GetValueY() > point.GetValueY()) &&
-        (point.GetValueX() < (points_[j].GetValueX() - points_[i].GetValueX()) * (point.GetValueY() - points_[i].GetValueY()) / (points_[j].GetValueY() - points_[i].GetValueY()) + points_[i].GetValueX()))
+        (point.GetValueX() < (points_[j].GetValueX() - points_[i].GetValueX()) *
+                                     (point.GetValueY() - points_[i].GetValueY()) /
+                                     (points_[j].GetValueY() - points_[i].GetValueY()) +
+                                 points_[i].GetValueX()))
       inside = !inside;
   }
   return inside;
@@ -47,4 +50,4 @@ std::string Polygon::ToString() const {
   result += "]";
   return result;
 }
-}
+}  // namespace geometry

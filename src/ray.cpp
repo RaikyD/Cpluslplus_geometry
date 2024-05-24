@@ -1,7 +1,7 @@
 #include "../ray.h"
 
 namespace geometry {
-Ray::Ray(const Point& p1, const Point& p2): p1_(p1), p2_(p2) {
+Ray::Ray(const Point& p1, const Point& p2) : p1_(p1), p2_(p2) {
 }
 IShape& Ray::Move(const geometry::Vector& v) {
   p1_.Move(v);
@@ -33,7 +33,9 @@ bool Ray::CrossesSegment(const Segment& Segment) const {
 }
 
 [[nodiscard]] std::string Ray::ToString() const {
-  return "Rot ebal blyat";
+  return "Ray(Point(" + std::to_string(p1_.GetValueX()) + ", " + std::to_string(p1_.GetValueY()) + "), Vector(" +
+         std::to_string(p2_.GetValueX() - p1_.GetValueX()) + ", " + std::to_string(p2_.GetValueY() - p1_.GetValueY()) +
+         "))";
 }
 Point Ray::GetValueOfP1() const {
   return p1_;
@@ -42,4 +44,4 @@ Point Ray::GetValueOfP2() const {
   return p2_;
 }
 
-}
+}  // namespace geometry

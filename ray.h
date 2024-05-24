@@ -21,4 +21,4 @@ class Ray : public IShape {
   Point GetValueOfP1() const;
   Point GetValueOfP2() const;
 };
-}
+}  // namespace geometry

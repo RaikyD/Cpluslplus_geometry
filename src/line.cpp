@@ -18,14 +18,10 @@ bool Line::ContainsPoint(const Point& p) const {
 bool Line::CrossesSegment(const Segment& Segment) const {
   Point p1 = Segment.GetValuep1();
   Point p2 = Segment.GetValuep2();
-  int k = (p2.GetValueY() - p1.GetValueX()) / (p2.GetValueX() - p1.GetValueX());
-  int b = (p1.GetValueX() * (p2.GetValueY() - p1.GetValueY()) / (p2.GetValueX() - p1.GetValueX())) + p1.GetValueY();
-  if (p2.GetValueY() >= k * p2.GetValueX() + b && p1.GetValueY() <= k * p1.GetValueX() + b) {
-    return true;
-  } else if (p2.GetValueY() <= k * p2.GetValueX() + b && p1.GetValueY() >= k * p1.GetValueX() + b) {
-    return true;
-  }
-  return false;
+  int k = (p2.GetValueY() - p1.GetValueY()) / (p2.GetValueX() - p1.GetValueX());
+  int b = p1.GetValueY() - k * p1.GetValueX();
+  bool side1 = (p1.GetValueY() - (k * p1.GetValueX() + b)) * (p2.GetValueY() - (k * p2.GetValueX() + b)) <= 0;
+  return side1;
 }
 
 [[nodiscard]] std::unique_ptr<IShape> Line::Clone() const {
