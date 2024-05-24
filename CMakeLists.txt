@@ -14,4 +14,8 @@ add_executable(contest5 main.cpp
         segment.h
         src/line.cpp
         line.h
+        ray.h
+        src/ray.cpp
+        polygon.h
+        src/polygon.cpp
 )

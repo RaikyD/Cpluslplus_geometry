@@ -1,13 +1,14 @@
-#include "../line.h"
+#include "../ray.h"
+
 namespace geometry {
-Line::Line(const Point& p1, const Point& p2) : p1_(p1), p2_(p2) {
+Ray::Ray(const Point& p1, const Point& p2): p1_(p1), p2_(p2) {
 }
-IShape& Line::Move(const Vector& v) {
+IShape& Ray::Move(const geometry::Vector& v) {
   p1_.Move(v);
   p2_.Move(v);
   return *this;
 }
-bool Line::ContainsPoint(const Point& p) const {
+bool Ray::ContainsPoint(const geometry::Point& p) const {
   Point p1 = this->GetValueOfP1();
   Point p2 = this->GetValueOfP2();
   bool ans = (p.GetValueX() - p1.GetValueX()) / (p2.GetValueX() - p1.GetValueX()) ==
@@ -15,7 +16,7 @@ bool Line::ContainsPoint(const Point& p) const {
   return ans;
 }
 
-bool Line::CrossesSegment(const Segment& Segment) const {
+bool Ray::CrossesSegment(const Segment& Segment) const {
   Point p1 = Segment.GetValuep1();
   Point p2 = Segment.GetValuep2();
   int k = (p2.GetValueY() - p1.GetValueX()) / (p2.GetValueX() - p1.GetValueX());
@@ -27,18 +28,18 @@ bool Line::CrossesSegment(const Segment& Segment) const {
   }
   return false;
 }
+[[nodiscard]] std::unique_ptr<IShape> Ray::Clone() const {
+  return std::make_unique<Ray>(p1_, p2_);
+}
 
-[[nodiscard]] std::unique_ptr<IShape> Line::Clone() const {
-  return std::make_unique<Line>(p1_, p2_);
+[[nodiscard]] std::string Ray::ToString() const {
+  return "Rot ebal blyat";
 }
-[[nodiscard]] std::string Line::ToString() const {
-  return "Line[(" + std::to_string(p1_.GetValueX()) + ", " + std::to_string(p1_.GetValueY()) + "), (" +
-         std::to_string(p2_.GetValueX()) + ", " + std::to_string(p2_.GetValueY()) + ")]";
-}
-Point Line::GetValueOfP1() const {
+Point Ray::GetValueOfP1() const {
   return p1_;
 }
-Point Line::GetValueOfP2() const {
+Point Ray::GetValueOfP2() const {
   return p2_;
 }
-}  // namespace geometry
+
+}
