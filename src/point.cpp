@@ -1,5 +1,5 @@
-#include "Point.h"
-#include "Segment.h"
+#include "../point.h"
+#include "../segment.h"
 namespace geometry {
 Point::Point(int x, int y) {
   x_ = x;
@@ -16,8 +16,8 @@ int Point::GetValueY() const {
   return y_;
 }
 IShape& Point::Move(const Vector& v) {
-  x_ += v.GetValueOf_X();
-  y_ += v.GetValueOf_Y();
+  x_ += v.GetValueOfX();
+  y_ += v.GetValueOfY();
   return *this;
 }
 
@@ -26,8 +26,8 @@ bool Point::ContainsPoint(const Point& p) const {
 }
 
 bool Point::CrossesSegment(const Segment& s) const {
-  Point a = s.GetValue_p1();
-  Point b = s.GetValue_p2();
+  Point a = s.GetValuep1();
+  Point b = s.GetValuep2();
   int cross = (y_ - a.y_) * (b.x_ - a.x_) - (x_ - a.x_) * (b.y_ - a.y_);
 
   if (std::abs(cross) > 1e-6) {

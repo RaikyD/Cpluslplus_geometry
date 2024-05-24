@@ -1,15 +1,14 @@
-#ifndef CONTEST5_LINE_H
-#define CONTEST5_LINE_H
+#pragma once
 #include "IShape.h"
-#include "Point.h"
-#include "Vector.h"
-#include "Segment.h"
-
+#include "point.h"
+#include "vector.h"
+#include "segment.h"
 namespace geometry {
 class Line : IShape {
  private:
   Point p1_;
   Point p2_;
+
  public:
   Line(const Point& p1, const Point& p2);
   IShape& Move(const Vector& v) override;
@@ -17,10 +16,7 @@ class Line : IShape {
   bool CrossesSegment(const Segment& segment) override;
   [[nodiscard]] std::unique_ptr<IShape> Clone() const override;
   [[nodiscard]] std::string ToString() const override;
-  Point GetValueOf_P1();
-  Point GetValueOf_P2();
-
+  point GetValueOfP1();
+  point GetValueOfP2();
 };
-}
-
-#endif  // CONTEST5_LINE_H
+}  // namespace geometry

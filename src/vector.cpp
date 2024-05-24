@@ -1,14 +1,14 @@
-#include "Vector.h"
+#include "../vector.h"
 
 namespace geometry {
 Vector::Vector(int x, int y) : x_(x), y_(y) {
 }
 
-[[nodiscard]] int Vector::GetValueOf_X() const {
+[[nodiscard]] int Vector::GetValueOfX() const {
   return x_;
 }
 
-[[nodiscard]] int Vector::GetValueOf_Y() const {
+[[nodiscard]] int Vector::GetValueOfY() const {
   return y_;
 }
 

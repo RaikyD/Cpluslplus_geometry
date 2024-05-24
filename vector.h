@@ -1,6 +1,4 @@
-#ifndef CONTEST5_VECTOR_H
-#define CONTEST5_VECTOR_H
-
+#pragma once
 namespace geometry {
 class Vector {
  private:
@@ -9,8 +7,8 @@ class Vector {
 
  public:
   Vector(int x, int y);
-  [[nodiscard]] int GetValueOf_X() const;
-  [[nodiscard]] int GetValueOf_Y() const;
+  [[nodiscard]] int GetValueOfX() const;
+  [[nodiscard]] int GetValueOfY() const;
   Vector operator-() const;
   Vector operator+(const Vector& other) const;
   Vector operator-(const Vector& other) const;
@@ -23,4 +21,3 @@ class Vector {
   bool operator==(const Vector& other) const;
 };
 }  // namespace geometry
-#endif  // CONTEST5_VECTOR_H

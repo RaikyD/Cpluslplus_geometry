@@ -1,7 +1,7 @@
-#ifndef CONTEST5_POINT_H
-#define CONTEST5_POINT_H
+#pragma once
+
 #include "IShape.h"
-#include "Vector.h"
+#include "vector.h"
 namespace geometry {
 class Point : public IShape {
  private:
@@ -20,5 +20,3 @@ class Point : public IShape {
   [[nodiscard]] std::string ToString() const override;
 };
 }  // namespace geometry
-
-#endif  // CONTEST5_POINT_H

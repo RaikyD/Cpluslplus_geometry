@@ -55,35 +55,35 @@ build CMakeFiles/contest5.dir/main.cpp.o: CXX_COMPILER__contest5_unscanned_Debug
   OBJECT_DIR = CMakeFiles/contest5.dir
   OBJECT_FILE_DIR = CMakeFiles/contest5.dir
 
-build CMakeFiles/contest5.dir/IShape.cpp.o: CXX_COMPILER__contest5_unscanned_Debug /Users/gurshhh/Desktop/contest5/IShape.cpp || cmake_object_order_depends_target_contest5
-  DEP_FILE = CMakeFiles/contest5.dir/IShape.cpp.o.d
+build CMakeFiles/contest5.dir/src/IShape.cpp.o: CXX_COMPILER__contest5_unscanned_Debug /Users/gurshhh/Desktop/contest5/src/IShape.cpp || cmake_object_order_depends_target_contest5
+  DEP_FILE = CMakeFiles/contest5.dir/src/IShape.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/contest5.dir
-  OBJECT_FILE_DIR = CMakeFiles/contest5.dir
+  OBJECT_FILE_DIR = CMakeFiles/contest5.dir/src
 
-build CMakeFiles/contest5.dir/Vector.cpp.o: CXX_COMPILER__contest5_unscanned_Debug /Users/gurshhh/Desktop/contest5/Vector.cpp || cmake_object_order_depends_target_contest5
-  DEP_FILE = CMakeFiles/contest5.dir/Vector.cpp.o.d
+build CMakeFiles/contest5.dir/src/vector.cpp.o: CXX_COMPILER__contest5_unscanned_Debug /Users/gurshhh/Desktop/contest5/src/vector.cpp || cmake_object_order_depends_target_contest5
+  DEP_FILE = CMakeFiles/contest5.dir/src/vector.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/contest5.dir
-  OBJECT_FILE_DIR = CMakeFiles/contest5.dir
+  OBJECT_FILE_DIR = CMakeFiles/contest5.dir/src
 
-build CMakeFiles/contest5.dir/Point.cpp.o: CXX_COMPILER__contest5_unscanned_Debug /Users/gurshhh/Desktop/contest5/Point.cpp || cmake_object_order_depends_target_contest5
-  DEP_FILE = CMakeFiles/contest5.dir/Point.cpp.o.d
+build CMakeFiles/contest5.dir/src/point.cpp.o: CXX_COMPILER__contest5_unscanned_Debug /Users/gurshhh/Desktop/contest5/src/point.cpp || cmake_object_order_depends_target_contest5
+  DEP_FILE = CMakeFiles/contest5.dir/src/point.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/contest5.dir
-  OBJECT_FILE_DIR = CMakeFiles/contest5.dir
+  OBJECT_FILE_DIR = CMakeFiles/contest5.dir/src
 
-build CMakeFiles/contest5.dir/Segment.cpp.o: CXX_COMPILER__contest5_unscanned_Debug /Users/gurshhh/Desktop/contest5/Segment.cpp || cmake_object_order_depends_target_contest5
-  DEP_FILE = CMakeFiles/contest5.dir/Segment.cpp.o.d
+build CMakeFiles/contest5.dir/src/segment.cpp.o: CXX_COMPILER__contest5_unscanned_Debug /Users/gurshhh/Desktop/contest5/src/segment.cpp || cmake_object_order_depends_target_contest5
+  DEP_FILE = CMakeFiles/contest5.dir/src/segment.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/contest5.dir
-  OBJECT_FILE_DIR = CMakeFiles/contest5.dir
+  OBJECT_FILE_DIR = CMakeFiles/contest5.dir/src
 
-build CMakeFiles/contest5.dir/Line.cpp.o: CXX_COMPILER__contest5_unscanned_Debug /Users/gurshhh/Desktop/contest5/Line.cpp || cmake_object_order_depends_target_contest5
-  DEP_FILE = CMakeFiles/contest5.dir/Line.cpp.o.d
+build CMakeFiles/contest5.dir/src/line.cpp.o: CXX_COMPILER__contest5_unscanned_Debug /Users/gurshhh/Desktop/contest5/src/line.cpp || cmake_object_order_depends_target_contest5
+  DEP_FILE = CMakeFiles/contest5.dir/src/line.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/contest5.dir
-  OBJECT_FILE_DIR = CMakeFiles/contest5.dir
+  OBJECT_FILE_DIR = CMakeFiles/contest5.dir/src
 
 
 # =============================================================================
@@ -93,7 +93,7 @@ build CMakeFiles/contest5.dir/Line.cpp.o: CXX_COMPILER__contest5_unscanned_Debug
 #############################################
 # Link the executable contest5
 
-build contest5: CXX_EXECUTABLE_LINKER__contest5_Debug CMakeFiles/contest5.dir/main.cpp.o CMakeFiles/contest5.dir/IShape.cpp.o CMakeFiles/contest5.dir/Vector.cpp.o CMakeFiles/contest5.dir/Point.cpp.o CMakeFiles/contest5.dir/Segment.cpp.o CMakeFiles/contest5.dir/Line.cpp.o
+build contest5: CXX_EXECUTABLE_LINKER__contest5_Debug CMakeFiles/contest5.dir/main.cpp.o CMakeFiles/contest5.dir/src/IShape.cpp.o CMakeFiles/contest5.dir/src/vector.cpp.o CMakeFiles/contest5.dir/src/point.cpp.o CMakeFiles/contest5.dir/src/segment.cpp.o CMakeFiles/contest5.dir/src/line.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk
   OBJECT_DIR = CMakeFiles/contest5.dir
   POST_BUILD = :

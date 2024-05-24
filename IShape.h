@@ -1,9 +1,8 @@
-#ifndef CONTEST5_ISHAPE_H
-#define CONTEST5_ISHAPE_H
+#pragma once
 
 #include <memory>
 #include <string>
-#include "Vector.h"
+#include "vector.h"
 
 namespace geometry {
 class Point;
@@ -24,5 +23,3 @@ class IShape {
   virtual ~IShape() = default;
 };
 }  // namespace geometry
-
-#endif
