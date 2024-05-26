@@ -1,3 +1,0 @@
-/Users/gurshhh/Desktop/contest5/cmake-build-debug/CMakeFiles/contest5.dir
-/Users/gurshhh/Desktop/contest5/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/gurshhh/Desktop/contest5/cmake-build-debug/CMakeFiles/rebuild_cache.dir
