@@ -9,25 +9,16 @@ IShape& Ray::Move(const geometry::Vector& v) {
   return *this;
 }
 bool Ray::ContainsPoint(const geometry::Point& p) const {
-  Point p1 = this->GetValueOfP1();
-  Point p2 = this->GetValueOfP2();
-  bool ans = (p.GetValueX() - p1.GetValueX()) / (p2.GetValueX() - p1.GetValueX()) ==
-             (p.GetValueY() - p1.GetValueY()) / (p2.GetValueY() - p1.GetValueY());
-  return ans;
+  auto vect = Vector(p2_ - p1_);
+  auto vect2 = Vector(p - p1_);
+  return ((vect.GetValueOfX() * vect2.GetValueOfY() - vect.GetValueOfY() * vect2.GetValueOfX()) == 0) &&
+         ((vect.GetValueOfX() * vect2.GetValueOfX() + vect.GetValueOfY() * vect2.GetValueOfY()) >= 0);
 }
 
-bool Ray::CrossesSegment(const Segment& Segment) const {
-  Point p1 = Segment.GetValuep1();
-  Point p2 = Segment.GetValuep2();
-  int k = (p2.GetValueY() - p1.GetValueX()) / (p2.GetValueX() - p1.GetValueX());
-  int b = (p1.GetValueX() * (p2.GetValueY() - p1.GetValueY()) / (p2.GetValueX() - p1.GetValueX())) + p1.GetValueY();
-  if (p2.GetValueY() >= k * p2.GetValueX() + b && p1.GetValueY() <= k * p1.GetValueX() + b) {
-    return true;
-  } else if (p2.GetValueY() <= k * p2.GetValueX() + b && p1.GetValueY() >= k * p1.GetValueX() + b) {
-    return true;
-  }
-  return false;
-}
+bool Ray::CrossesSegment(const Segment& s) const { Point a = s.GetValuep1(); Point b = s.GetValuep2(); Vector ab = Vector(b - a); Vector ap = Vector(GetValuep1() - a); Vector n = Vector(-ab.GetValueOfY(), ab.GetValueOfX()); double dotProduct = n.GetValueOfX() * ap.GetValueOfX() + n.GetValueOfY() * ap.GetValueOfY(); double t = (n.GetValueOfX() * ab.GetValueOfX() + n.GetValueOfY() * ab.GetValueOfY()) / (n.GetValueOfX() * n.GetValueOfX() + n.GetValueOfY() * n.GetValueOfY()); if (t < 0) { return false; } Point intersectionPoint = GetValuep1() + t * GetValueDirection(); if (intersectionPoint.GetValueX() < a.GetValueX() || intersectionPoint.GetValueX() > b.GetValueX() || intersectionPoint.GetValueY() < a.GetValueY() || intersectionPoint.GetValueY() > b.GetValueY()) { return false; } return true; }
+
+
+
 [[nodiscard]] std::unique_ptr<IShape> Ray::Clone() const {
   return std::make_unique<Ray>(p1_, p2_);
 }

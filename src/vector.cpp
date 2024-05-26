@@ -59,4 +59,12 @@ Vector& Vector::operator/=(int scalar) {
 bool Vector::operator==(const Vector& other) const {
   return x_ == other.x_ && y_ == other.y_;
 }
+
+int Vector::CrossProduct(const Vector& other) const {
+  return x_ * other.y_ - y_ * other.x_;
+}
+
+int Vector::DotProduct(const Vector& other) const {
+  return x_ * other.x_ + y_ * other.y_;
+}
 }  // namespace geometry

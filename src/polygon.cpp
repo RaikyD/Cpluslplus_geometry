@@ -41,13 +41,13 @@ std::unique_ptr<IShape> Polygon::Clone() const {
 }
 
 std::string Polygon::ToString() const {
-  std::string result = "Polygon[";
+  std::string result = "Polygon(";
   for (const auto& point : points_) {
     result += point.ToString() + ", ";
   }
   result.pop_back();
   result.pop_back();
-  result += "]";
+  result += ")";
   return result;
 }
 }  // namespace geometry

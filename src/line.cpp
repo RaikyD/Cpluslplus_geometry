@@ -10,8 +10,13 @@ IShape& Line::Move(const Vector& v) {
 bool Line::ContainsPoint(const Point& p) const {
   Point p1 = this->GetValueOfP1();
   Point p2 = this->GetValueOfP2();
-  bool ans = (p.GetValueX() - p1.GetValueX()) / (p2.GetValueX() - p1.GetValueX()) ==
-             (p.GetValueY() - p1.GetValueY()) / (p2.GetValueY() - p1.GetValueY());
+  bool ans = false;
+  if (p2.GetValueX() - p1.GetValueX() != 0 && p2.GetValueY() - p1.GetValueY() != 0) {
+    ans = (p.GetValueX() - p1.GetValueX()) / (p2.GetValueX() - p1.GetValueX()) ==
+          (p.GetValueY() - p1.GetValueY()) / (p2.GetValueY() - p1.GetValueY());
+  } else {
+    ans = p.GetValueX() == p1.GetValueX() && p.GetValueY() == p1.GetValueY();
+  }
   return ans;
 }
 

@@ -19,5 +19,7 @@ class Vector {
   Vector& operator*=(int scalar);
   Vector& operator/=(int scalar);
   bool operator==(const Vector& other) const;
+  int CrossProduct(const Vector& other) const;
+  int DotProduct(const Vector& other) const;
 };
 }  // namespace geometry

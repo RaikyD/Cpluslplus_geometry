@@ -28,21 +28,10 @@ bool Point::ContainsPoint(const Point& p) const {
 bool Point::CrossesSegment(const Segment& s) const {
   Point a = s.GetValuep1();
   Point b = s.GetValuep2();
-  int cross = (y_ - a.y_) * (b.x_ - a.x_) - (x_ - a.x_) * (b.y_ - a.y_);
-
-  if (std::abs(cross) > 1e-6) {
-    return false;
-  }
-
-  int dotprod = (x_ - a.x_) * (b.x_ - a.x_) + (y_ - a.y_ * (b.y_ - a.y_));
-  if (dotprod < 0) {
-    return false;
-  }
-  int squaredlengthba = (b.x_ - a.x_) * (b.x_ - a.x_) + (b.y_ - a.y_) * (b.y_ - a.y_);
-  if (dotprod > squaredlengthba) {
-    return false;
-  }
-  return true;
+  auto ap = Vector(*this - a);
+  auto pb = Vector(b - *this);
+  return ((ap.GetValueOfX() * pb.GetValueOfY() - ap.GetValueOfY() * pb.GetValueOfX()) == 0) &&
+         ((ap.GetValueOfX() * pb.GetValueOfX() + ap.GetValueOfY() * pb.GetValueOfY()) >= 0);
 }
 
 [[nodiscard]] std::unique_ptr<IShape> Point::Clone() const {
