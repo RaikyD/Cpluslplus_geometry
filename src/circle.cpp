@@ -1,5 +1,4 @@
 #include "../circle.h"
-#include "../point.h"
 #include <string>
 #include <cmath>
 
@@ -17,38 +16,34 @@ bool Circle::ContainsPoint(const Point& p) const {
   return (dx * dx + dy * dy) <= radius_ * radius_;
 }
 
-bool Circle::CrossesSegment(const Segment& s) const {
-  // Вычисляем расстояние от центра окружности до ближайшей точки на отрезке
-  int x1 = s.GetValuep1().GetValueX();
-  int y1 = s.GetValuep1().GetValueY();
-  int x2 = s.GetValuep2().GetValueX();
-  int y2 = s.GetValuep2().GetValueY();
-  int xc = center_point_.GetValueX();
-  int yc = center_point_.GetValueY();
+bool Circle::CrossesSegment(const Segment& segment) const {
+  Circle circle = Circle(center_point_, radius_);
+  Point p1 = segment.GetValuep1();
+  Point p2 = segment.GetValuep2();
+  double a = p2.GetValueY() - p1.GetValueY();
+  double b = p1.GetValueX() - p2.GetValueX();
+  double c = a * p1.GetValueX() + b * p1.GetValueY();
+  // Берем 4 точки на окружности, самые крайние каждой стороны
+  Point p_top = Point(center_point_.GetValueX(), center_point_.GetValueY() + radius_);
+  Point p_bottom = Point(center_point_.GetValueX(), center_point_.GetValueY() - radius_);
+  Point p_left = Point(center_point_.GetValueX() - radius_, center_point_.GetValueY());
+  Point p_right = Point(center_point_.GetValueX() + radius_, center_point_.GetValueY());
+  if (p1 == p_top || p1 == p_bottom || p1 == p_left || p1 == p_right) {
+    return true;
+  }
+  if (p2 == p_top || p2 == p_bottom || p2 == p_left || p2 == p_right) {
+    return true;
+  }
+  double distance =
+      std::abs(a * center_point_.GetValueX() + b * center_point_.GetValueY() + c) / std::sqrt(a * a + b * b);
 
-  int dx = x2 - x1;
-  int dy = y2 - y1;
-  int dr = static_cast<int>(std::sqrt(dx * dx + dy * dy));
-
-  if (dr == 0) {
-    // Отрезок вырожден в точку
-    return ContainsPoint(s.GetValuep1());
+  if (distance <= radius_ && p1.GetValueX() != p2.GetValueX()) {
+    bool p1_inside = ContainsPoint(p1);
+    bool p2_inside = ContainsPoint(p2);
+    return !(p1_inside && p2_inside);
   }
 
-  int t = ((xc - x1) * dx + (yc - y1) * dy) / (dr * dr);
-  if (t < 0) {
-    t = 0;
-  } else if (t > 1) {
-    t = 1;
-  }
-
-  int closest_x = x1 + t * dx;
-  int closest_y = y1 + t * dy;
-
-  int dx_c = closest_x - xc;
-  int dy_c = closest_y - yc;
-  int dist = dx_c * dx_c + dy_c * dy_c;
-  return dist <= radius_ * radius_;
+  return false;
 }
 
 std::unique_ptr<IShape> Circle::Clone() const {
@@ -58,5 +53,9 @@ std::unique_ptr<IShape> Circle::Clone() const {
 std::string Circle::ToString() const {
   return "Circle(Point(" + std::to_string(center_point_.GetValueX()) + ", " +
          std::to_string(center_point_.GetValueY()) + "), " + std::to_string(radius_) + ")";
+}
+int Circle::Distance(const Point& point) {
+  return std::sqrt((point.GetValueX() - center_point_.GetValueX()) * (point.GetValueX() - center_point_.GetValueX()) +
+                   (point.GetValueY() - center_point_.GetValueY()) * (point.GetValueY() - center_point_.GetValueY()));
 }
 }  // namespace geometry

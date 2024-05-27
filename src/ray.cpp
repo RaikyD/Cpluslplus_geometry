@@ -1,5 +1,4 @@
 #include "../ray.h"
-#include "../line.h"
 namespace geometry {
 Ray::Ray(const Point& p1, const Point& p2) : p1_(p1), p2_(p2) {
 }
@@ -18,22 +17,30 @@ bool Ray::ContainsPoint(const geometry::Point& p) const {
 bool Ray::CrossesSegment(const Segment& s) const {
   Point p1 = s.GetValuep1();
   Point p2 = s.GetValuep2();
-  Vector v(p2_ - p1_);
-  Vector u(p2 - p1);
 
-  int cross = v.CrossProduct(u);
-  if (cross == 0) {
-    if (p1.GetValueX() == p1_.GetValueX() && p1.GetValueY() == p1_.GetValueY()) {
-      return true;
-    }
-    return false;
+  int o1 = s.Orientation(p1, p2, p1_);
+  int o2 = s.Orientation(p1, p2, p2_);
+  int o3 = s.Orientation(p1_, p2_, p1);
+  int o4 = s.Orientation(p1_, p2_, p2);
+
+  if (o1 != o2 && o3 != o4) {
+    return true;
   }
 
-  Vector w(p1 - p1_);
-  int t = w.CrossProduct(u) / cross;
-  int alpha = v.CrossProduct(w) / cross;
+  if (o1 == 0 && s.OnSegment(p1, p1_, p2)) {
+    return true;
+  }
+  if (o2 == 0 && s.OnSegment(p2, p1_, p2)) {
+    return true;
+  }
+  if (o3 == 0 && s.OnSegment(p1_, p1, p2)) {
+    return true;
+  }
+  if (o4 == 0 && s.OnSegment(p2_, p1, p2)) {
+    return true;
+  }
 
-  return t >= 0 && alpha >= 0 && alpha <= 1;
+  return false;
 }
 
 [[nodiscard]] std::unique_ptr<IShape> Ray::Clone() const {

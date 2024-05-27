@@ -1,7 +1,4 @@
 #include "../segment.h"
-#include "../IShape.h"
-#include "../vector.h"
-#include "../point.h"
 
 namespace geometry {
 Segment::Segment(const Point &p1, const Point &p2) : p1_(p1), p2_(p2) {

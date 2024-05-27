@@ -16,7 +16,7 @@ class IShape {
  public:
   virtual IShape& Move(const Vector&) = 0;
   virtual bool ContainsPoint(const Point&) const = 0;
-  virtual bool CrossesSegment(const Segment&) const = 0;
+  [[nodiscard]] virtual bool CrossesSegment(const Segment&) const = 0;
   [[nodiscard]] virtual std::unique_ptr<IShape> Clone() const = 0;
   [[nodiscard]] virtual std::string ToString() const = 0;
 

@@ -19,5 +19,6 @@ class Point : public IShape {
   [[nodiscard]] std::unique_ptr<IShape> Clone() const override;
   [[nodiscard]] std::string ToString() const override;
   Vector operator-(const Point& p) const;
+  bool operator==(const Point& p) const;
 };
 }  // namespace geometry

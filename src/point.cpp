@@ -45,4 +45,7 @@ bool Point::CrossesSegment(const Segment& s) const {
 Vector Point::operator-(const geometry::Point& p) const {
   return {this->x_ - p.x_, this->y_ - p.y_};
 }
+bool Point::operator==(const Point& p) const {
+  return (x_ == p.x_ && y_ == p.y_);
+}
 }  // namespace geometry

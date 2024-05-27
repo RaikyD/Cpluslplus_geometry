@@ -8,63 +8,22 @@ IShape& Line::Move(const Vector& v) {
   return *this;
 }
 bool Line::ContainsPoint(const Point& p) const {
-  Point p1 = this->GetValueOfP1();
-  Point p2 = this->GetValueOfP2();
-  bool ans = false;
-  if (p2.GetValueX() - p1.GetValueX() != 0 && p2.GetValueY() - p1.GetValueY() != 0) {
-    ans = (p.GetValueX() - p1.GetValueX()) / (p2.GetValueX() - p1.GetValueX()) ==
-          (p.GetValueY() - p1.GetValueY()) / (p2.GetValueY() - p1.GetValueY());
-  } else {
-    ans = p.GetValueX() == p1.GetValueX() && p.GetValueY() == p1.GetValueY();
-  }
-  return ans;
+  Segment seg = Segment(p1_, p2_);
+  int orientation = seg.Orientation(p1_, p2_, p);
+  return orientation == 0;
 }
-
-bool Line::CrossesSegment(const Segment& Segment) const {
-  int x11 = p1_.GetValueX();
-  int y11 = p1_.GetValueY();
-  int x12 = p2_.GetValueX();
-  int y12 = p2_.GetValueY();
-
-  int x21 = Segment.GetValuep1().GetValueX();
-  int y21 = Segment.GetValuep1().GetValueY();
-  int x22 = Segment.GetValuep2().GetValueX();
-  int y22 = Segment.GetValuep2().GetValueY();
-
-  int maxx1 = std::max(x11, x12), maxy1 = std::max(y11, y12);
-  int minx1 = std::min(x11, x12), miny1 = std::min(y11, y12);
-  int maxx2 = std::max(x21, x22), maxy2 = std::max(y21, y22);
-  int minx2 = std::min(x21, x22), miny2 = std::min(y21, y22);
-
-  if (minx1 > maxx2 || maxx1 < minx2 || miny1 > maxy2 || maxy1 < miny2) {
-    return false;
+bool Line::CrossesSegment(const Segment& segment) const {
+  Point p1 = segment.GetValuep1();
+  Point p2 = segment.GetValuep2();
+  int o1 = segment.Orientation(p1_, p2_, p1);
+  int o2 = segment.Orientation(p1_, p2_, p2);
+  if (o1 * o2 < 0) {
+    return true;
   }
-
-  int dx1 = x12 - x11, dy1 = y12 - y11;
-  int dx2 = x22 - x21, dy2 = y22 - y21;
-  int dxx = x11 - x21, dyy = y11 - y21;
-  int div, mul;
-
-  if ((div = (int)((double)dy2 * dx1 - (double)dx2 * dy1)) == 0) {
-    return false;
+  if (o1 == 0 || o2 == 0) {
+    return true;
   }
-  if (div > 0) {
-    if ((mul = (int)((double)dx1 * dyy - (double)dy1 * dxx)) < 0 || mul > div) {
-      return false;
-    }
-    if ((mul = (int)((double)dx2 * dyy - (double)dy2 * dxx)) < 0 || mul > div) {
-      return false;
-    }
-  } else {
-    if ((mul = -(int)((double)dx1 * dyy - (double)dy1 * dxx)) < 0 || mul > -div) {
-      return false;
-    }
-    if ((mul = -(int)((double)dx2 * dyy - (double)dy2 * dxx)) < 0 || mul > -div) {
-      return false;
-    }
-  }
-
-  return true;
+  return false;
 }
 
 std::unique_ptr<IShape> Line::Clone() const {

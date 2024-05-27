@@ -15,5 +15,6 @@ class Circle : public IShape {
   [[nodiscard]] bool CrossesSegment(const Segment& s) const override;
   [[nodiscard]] std::unique_ptr<IShape> Clone() const override;
   [[nodiscard]] std::string ToString() const override;
+  int Distance(const Point& point);
 };
 }  // namespace geometry

@@ -1,5 +1,4 @@
 #include "../polygon.h"
-#include <cmath>
 #include <algorithm>
 
 namespace geometry {
@@ -16,6 +15,10 @@ IShape& Polygon::Move(const Vector& vector) {
 
 bool Polygon::ContainsPoint(const Point& point) const {
   bool inside = false;
+  for (const auto& i : points_) {
+    if (point == i)
+      return true;
+  }
   for (size_t i = 0, j = points_.size() - 1; i < points_.size(); j = i++) {
     if ((points_[i].GetValueY() > point.GetValueY()) != (points_[j].GetValueY() > point.GetValueY()) &&
         (point.GetValueX() < (points_[j].GetValueX() - points_[i].GetValueX()) *
